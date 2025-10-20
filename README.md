@@ -115,6 +115,62 @@ Les images Docker sont automatiquement construites et publiées sur GitHub Conta
 
 Le conteneur inclut un health check qui vérifie la disponibilité de n8n toutes les 30 secondes.
 
+## 🌐 Déploiement en ligne (Cloud)
+
+### Option A: Railway (Gratuit - Recommandé)
+
+1. **Connectez votre repo GitHub à Railway** :
+   - Allez sur [railway.app](https://railway.app)
+   - Connectez votre compte GitHub
+   - Sélectionnez ce repository
+
+2. **Déploiement automatique** :
+   - Railway détecte automatiquement le `Dockerfile`
+   - Le fichier `railway.json` configure le déploiement
+   - URL générée automatiquement : `https://votre-app.railway.app`
+
+### Option B: Render (Gratuit)
+
+1. **Connectez à Render** :
+   - Allez sur [render.com](https://render.com)
+   - Créez un nouveau "Web Service"
+   - Connectez ce repository GitHub
+
+2. **Configuration automatique** :
+   - Render utilise le fichier `render.yaml`
+   - SSL automatique avec certificat gratuit
+   - URL : `https://n8n-kernel.onrender.com`
+
+### Option C: VPS/Serveur Cloud (Payant mais flexible)
+
+Pour un serveur avec votre propre domaine :
+
+```bash
+# Sur votre serveur (Ubuntu/Debian)
+git clone https://github.com/Archlord12345/KERNEL_DOCKER.git
+cd KERNEL_DOCKER
+
+# Configurez l'environnement
+cp .env.example .env
+nano .env  # Modifiez DOMAIN et EMAIL
+
+# Déployez avec SSL automatique
+docker-compose -f docker-compose.cloud.yml up -d
+```
+
+**Prérequis VPS** :
+- Serveur avec Docker installé
+- Domaine pointant vers votre serveur
+- Ports 80 et 443 ouverts
+
+## 🔒 Sécurité pour déploiement public
+
+⚠️ **Important** : Pour un déploiement public, configurez :
+
+1. **Authentification** : n8n créera un compte admin au premier accès
+2. **HTTPS** : Automatique avec Railway/Render, configuré avec Traefik pour VPS
+3. **Clé de chiffrement** : Définissez `N8N_ENCRYPTION_KEY` dans `.env`
+
 ## Publication automatique
 
 À chaque push sur `main` ou création de tag `v*`, GitHub Actions :
