@@ -2,9 +2,11 @@ version: '3.8'
 
 services:
   n8n:
-    # Option 1: Utiliser l'image hébergée (recommandé)
-    image: ghcr.io/archlord12345/kernel_docker/n8n-kernel:latest
-    # Option 2: Build local (décommentez la ligne suivante et commentez image:)
+    # Option 1: Utiliser l'image officielle n8n (plus stable)
+    image: n8nio/n8n:latest
+    # Option 2: Utiliser notre image personnalisée (décommentez la ligne suivante)
+    # image: ghcr.io/archlord12345/kernel_docker/n8n-kernel:latest
+    # Option 3: Build local (décommentez la ligne suivante)
     # build: .
     container_name: n8n-kernel
     ports:
